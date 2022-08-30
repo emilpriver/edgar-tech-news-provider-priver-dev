@@ -7,12 +7,18 @@ example.com = ExampleComProvider
 package ExampleComProvider
 
 import (
+	"encoding/json"
+	"log"
+	"net/http"
+	"strings"
 	"time"
 
 	providers "github.com/edgar-systems/tech-news-website/Backend/providers"
 )
 
 type PostsSolution struct{}
+
+var postsUrl = "https://priver.dev/blog/index.json"
 
 /*
 * Config returns information used for the application when it seeds information to the database.
@@ -22,32 +28,66 @@ contactEmail: used if needed for contact
 
 func (s *PostsSolution) Config() providers.Provider {
 	return providers.Provider{
-		AccountType:  "personal",
-		ContactEmail: "example@example.com",
+		AccountType:         "personal",
+		ContactEmail:        "emil@priver.dev",
+		AuthorUrl:           "https://priver.dev",
+		AuthorDefaultTopics: []string{},
+		AuthorDefaultCover:  "https://cdn.priver.dev/?src=https://priver.dev/images/me.png&w=1000",
 	}
 }
 
-/*
-Here goes your logic.
-Your Posts function should return all posts you want to add to the portal.
-The important is that Posts should return a array of provider.Post which is all your posts.
-How you build the logic is up to you.
+type BlogJson struct {
+	Data []struct {
+		Title     string    `json:"title"`
+		Date      time.Time `json:"date"`
+		Type      string    `json:"type"`
+		Permalink string    `json:"permalink"`
+		Summary   string    `json:"summary"`
+		Hero      string    `json:"hero"`
+		Tags      string    `json:"tags"`
+	} `json:"data"`
+}
 
-We only read the /provider map
-*/
 func (s *PostsSolution) Posts() ([]providers.Post, error) {
 	var posts []providers.Post
+	var data BlogJson
 
-	posts = append(posts, providers.Post{
-		Link:        "https://example.com",
-		ID:          "4d41a4e5-0539-4823-89f6-6024aea8c7de",
-		Excerpt:     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent semper non leo vitae porttitor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae",
-		Title:       "Lorem ipsum",
-		PublishedAt: time.Now(),
-		Cover:       "https://picsum.photos/1000",
-		Categories:  []string{"Golang"},
-		Tags:        []string{"Tag"},
-	})
+	resp, err := http.Get(postsUrl)
+
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	defer resp.Body.Close()
+
+	json.NewDecoder(resp.Body).Decode(&data)
+
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	for _, item := range data.Data {
+		tags := []string{}
+
+		for _, tag := range strings.Split(item.Tags, ",") {
+			newTag := strings.ReplaceAll(strings.Trim(tag, " "), ",", "")
+
+			if len(newTag) > 0 {
+				tags = append(tags, newTag)
+			}
+		}
+
+		posts = append(posts, providers.Post{
+			Link:        item.Permalink,
+			ID:          item.Permalink,
+			Excerpt:     item.Summary,
+			Title:       item.Title,
+			PublishedAt: item.Date,
+			Cover:       item.Hero,
+			Categories:  []string{},
+			Tags:        tags,
+		})
+	}
 
 	return posts, nil
 }

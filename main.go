@@ -9,7 +9,7 @@ import (
 	ExampleComProvider "github.com/edgar-systems/tech-news-website-provider-template/provider"
 )
 
-var port = "8080"
+var port = "1337"
 
 func handlePosts(w http.ResponseWriter, r *http.Request) {
 	p := ExampleComProvider.PostsSolution{}
