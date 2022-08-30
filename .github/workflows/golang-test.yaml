@@ -1,0 +1,23 @@
+name: Test the code
+
+on: [pull_request, push]
+
+jobs:
+  full_ci:
+    strategy:
+      matrix:
+        go_version: [ 1.17.x, 1.18.x, 1.19.x ]
+
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: ${{ matrix.go_version }}
+      
+      - name: Run tests
+        run: go test ./...
