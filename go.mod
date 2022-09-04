@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 module github.com/emilpriver/edgar-tech-news-provider-priver-dev
-=======
-module github.com/emilpriver/edgar-tech-news-provider-priver-dev/
->>>>>>> 6bf2cc673316a99514bbe52e2377005ac70d4460
 
 go 1.19
 
