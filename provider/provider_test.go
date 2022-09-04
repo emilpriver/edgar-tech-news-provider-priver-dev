@@ -1,11 +1,10 @@
-package ExampleComProvider
+package PriverDevProvider
 
 import "testing"
 
 func TestPosts(t *testing.T) {
 	postsSolution := PostsSolution{}
 	posts, err := postsSolution.Posts()
-
 	if err != nil {
 		t.Fatal(err)
 	}
