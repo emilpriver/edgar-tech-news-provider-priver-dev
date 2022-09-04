@@ -4,7 +4,7 @@ We recommend changeing to your domain and "provider".
 ex:
 example.com = ExampleComProvider
 */
-package ExampleComProvider
+package PriverDevProvider
 
 import (
 	"encoding/json"
@@ -53,7 +53,6 @@ func (s *PostsSolution) Posts() ([]providers.Post, error) {
 	var data BlogJson
 
 	resp, err := http.Get(postsUrl)
-
 	if err != nil {
 		log.Fatalln(err)
 	}
