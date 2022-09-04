@@ -1,4 +1,4 @@
-module github.com/edgar-systems/tech-news-website-provider-template
+module github.com/emilpriver/edgar-tech-news-provider-priver-dev/
 
 go 1.19
 
