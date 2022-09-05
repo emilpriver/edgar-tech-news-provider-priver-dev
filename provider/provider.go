@@ -13,7 +13,7 @@ import (
 	"strings"
 	"time"
 
-	providers "github.com/edgar-systems/tech-news-website/Backend/providers"
+	providers "github.com/edgar-systems/tech-news-provider"
 )
 
 type PostsSolution struct{}

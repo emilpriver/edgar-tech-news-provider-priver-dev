@@ -1,3 +1,5 @@
+github.com/edgar-systems/tech-news-provider v0.0.0-20220905145512-5139a965e208 h1:fD/0a5372yIoOBQ2hLza1lz7HKRmDgLcepx8Jem/IIM=
+github.com/edgar-systems/tech-news-provider v0.0.0-20220905145512-5139a965e208/go.mod h1:0/rt0cEE1AShKw6seoOJcVmMPa4cGuimRh7x7UHZ2VY=
 github.com/edgar-systems/tech-news-website-provider-template v0.0.0-20220830081642-1c4a201d0805 h1:94hFmK1fYV2ZgSyPHWK7zeMEiQOhD9SiyOMcMb8sCUM=
 github.com/edgar-systems/tech-news-website-provider-template v0.0.0-20220830081642-1c4a201d0805/go.mod h1:4+wip/XM1PuoPg9fAvdclK4T1PwisMofZWV2+YIOEts=
 github.com/edgar-systems/tech-news-website/Backend v0.0.0-20220830080530-8be208587b6e h1:YlNX+DoeA5krvbiynspeetmQbzwcaXabNgrMXOt5hX0=
