@@ -6,16 +6,13 @@ import (
 	"log"
 	"net/http"
 
-	ExampleComProvider "github.com/edgar-systems/tech-news-website-provider-template/provider"
+	PriverDevProvider "github.com/emilpriver/edgar-tech-news-provider-priver-dev/provider"
 )
 
 var port = "1337"
 
 func handlePosts(w http.ResponseWriter, r *http.Request) {
-	p := ExampleComProvider.PostsSolution{}
-
-	posts, err := p.Posts()
-
+	posts, err := PriverDevProvider.Posts()
 	if err != nil {
 		fmt.Print(fmt.Errorf("%w", err))
 		return

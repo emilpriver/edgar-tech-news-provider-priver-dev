@@ -16,8 +16,6 @@ import (
 	providers "github.com/edgar-systems/tech-news-provider"
 )
 
-type PostsSolution struct{}
-
 var postsUrl = "https://priver.dev/blog/index.json"
 
 /*
@@ -25,15 +23,12 @@ var postsUrl = "https://priver.dev/blog/index.json"
 accountType: can be one of "personal" or "company". This is used to split posts if it's a company that wrote it or if it come from a personal blog
 contactEmail: used if needed for contact
 */
-
-func (s *PostsSolution) Config() providers.Provider {
-	return providers.Provider{
-		AccountType:         "personal",
-		ContactEmail:        "emil@priver.dev",
-		AuthorUrl:           "https://priver.dev",
-		AuthorDefaultTopics: []string{},
-		AuthorDefaultCover:  "https://cdn.priver.dev/?src=https://priver.dev/images/me.png&w=1000",
-	}
+var ProviderConfig = providers.Provider{
+	AccountType:         "personal",
+	ContactEmail:        "emil@priver.dev",
+	AuthorUrl:           "https://priver.dev",
+	AuthorDefaultTopics: []string{},
+	AuthorDefaultCover:  "https://cdn.priver.dev/?src=https://priver.dev/images/me.png&w=1000",
 }
 
 type BlogJson struct {
@@ -48,7 +43,7 @@ type BlogJson struct {
 	} `json:"data"`
 }
 
-func (s *PostsSolution) Posts() ([]providers.Post, error) {
+func Posts() ([]providers.Post, error) {
 	var posts []providers.Post
 	var data BlogJson
 

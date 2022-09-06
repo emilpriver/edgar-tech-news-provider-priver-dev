@@ -3,8 +3,7 @@ package PriverDevProvider
 import "testing"
 
 func TestPosts(t *testing.T) {
-	postsSolution := PostsSolution{}
-	posts, err := postsSolution.Posts()
+	posts, err := Posts()
 	if err != nil {
 		t.Fatal(err)
 	}
